@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">  
+      
+
+</head>
+<body>
+    <div id="cards">
+        <!-- <div class="card">
+            <div id="poster">
+                <img src="images/card1.jpg" alt="">
+                <img src="images/blu-ray.png" alt="">
+                <img src="images/sale.png" alt="">
+            </div>
+            
+            <div id="title">
+            <div>Тайная жизнь</div>
+            <div>домашних животных 2</div>
+
+        </div>
+        <div id="price">
+            <div>15.00 руб.</div>
+            <div>17.00 руб.</div>            
+        </div>
+        <div id="rank">
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star</span>
+            <span class="material-icons">star_half</span>
+            <span class="material-icons">star_border</span>
+        </div>
+        <div id="order">
+            <img src="images/order.jpg" alt="">
+            
+        </div> -->
+
+        <script>
+myCard = [{
+    poster: `card1.jpg`,
+    title1: `Тайная жизнь`,
+    title2: `домашних животных 2`,
+    cost: 17,
+    currency: `руб.`,
+    type: `blu-ray.png`,
+    sales: `sale.png`,
+    action: true,
+    rating: 4,
+    but: `order.jpg`
+},
+{
+    poster: `ferd.jpg`,
+    title1: `История игрушек`,
+    title2: `Приключения Вилкинса`,
+    cost: 60,
+    currency: `руб.`,
+    type: `blu-ray.png`,
+    sales: `sale.png`,
+    action: false,
+    rating: 3,
+    but: `order.jpg`
+},
+{
+    poster: `toy4.jpg`,
+    title1: `Фердинанд`,
+    title2: `Побег из коровника`,
+    cost: 40,
+    currency: `руб.`,
+    type: `blu-ray.png`,
+    sales: `sale.png`,
+    action: true,
+    rating: 3.5,
+    but: `order.jpg`
+}];
+
+let s = ``;
+for (key=0; key<myCard.length; key++) {
+let fullCost = `${myCard[key].cost}, 00 ${myCard[key].currency}`;
+
+let saleCost = `${Math.round(myCard[key].cost*0.9)},00 ${myCard[key].currency}`;
+
+// формируем блок с рейтингом
+let stars = ``;
+starBorder = 5-myCard[key].rating;
+starHalf = myCard[key].rating - Math.floor(myCard[key].rating);
+
+for (i=1; i<=myCard[key].rating;i++) {
+    stars += `<span class="material-icons">star</span>`;    
+}
+if (starHalf > 0){
+    stars += `<span class="material-icons">star_half</span>`;
+    starBorder--;
+}
+
+for (i=0; i<starBorder;i++) {
+    stars += `<span class="material-icons">star_border</span>`;
+}
+
+
+//console.log(stars);
+s += `<div class="card">
+            <div id="poster">
+                <img src="images/${myCard[key].poster}" alt="">
+                <img src="images/${myCard[key].type}" alt="">
+                <img src="images/${myCard[key].sales}" alt="">
+            </div>
+            
+            <div id="title">
+            <div>${myCard[key].title1}</div>
+            <div>${myCard[key].title2}</div>
+
+        </div>
+        <div id="price">            
+            <div>${saleCost}</div>
+            <div>${fullCost}</div>            
+        </div>
+        <div id="rank">
+            ${stars}
+        </div>
+        <div id="order">
+            <img src="images/${myCard[key].but}" alt="">
+            
+        </div>
+`;
+
+
+    }//end for Mycards
+    cards.innerHTML = s;
+   
+        </script>
+
+
+    </div>
+    
+</body>
+</html>
