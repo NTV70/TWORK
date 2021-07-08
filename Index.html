@@ -53,7 +53,7 @@ myCard = [{
     type: `blu-ray.png`,
     sales: `sale.png`,
     action: true,
-    rating: 4,
+    rating: 4.5,
     but: `order.jpg`
 },
 {
@@ -80,7 +80,7 @@ myCard = [{
     rating: 3.5,
     but: `order.jpg`
 }];
-
+// рассчитываем цену с акцией
 let s = ``;
 for (key=0; key<myCard.length; key++) {
 let fullCost = `${myCard[key].cost}, 00 ${myCard[key].currency}`;
@@ -89,6 +89,12 @@ let saleCost = `${Math.round(myCard[key].cost*0.9)},00 ${myCard[key].currency}`;
 
 // формируем блок с рейтингом
 let stars = ``;
+if (myCard[key].rating > 5){
+    myCard[key].rating = 5;
+}
+if (myCard[key].rating < 0){
+    myCard[key].rating = 0;
+}
 starBorder = 5-myCard[key].rating;
 starHalf = myCard[key].rating - Math.floor(myCard[key].rating);
 
@@ -104,31 +110,37 @@ for (i=0; i<starBorder;i++) {
     stars += `<span class="material-icons">star_border</span>`;
 }
 
-
+let doSales = ``;
+let cardAction = ``;
+if (myCard[key].action){
+    doSales = `<div> ${saleCost}</div>`;
+    cardAction = `<img src="images/sale.png" alt="">`;
+}
 //console.log(stars);
 s += `<div class="card">
             <div id="poster">
                 <img src="images/${myCard[key].poster}" alt="">
                 <img src="images/${myCard[key].type}" alt="">
-                <img src="images/${myCard[key].sales}" alt="">
+                ${cardAction}
             </div>
             
             <div id="title">
-            <div>${myCard[key].title1}</div>
-            <div>${myCard[key].title2}</div>
+                <div>${myCard[key].title1}</div>
+                <div>${myCard[key].title2}</div>
 
-        </div>
-        <div id="price">            
-            <div>${saleCost}</div>
-            <div>${fullCost}</div>            
-        </div>
-        <div id="rank">
-            ${stars}
-        </div>
-        <div id="order">
-            <img src="images/${myCard[key].but}" alt="">
-            
-        </div>
+            </div>
+            <div id="price">            
+                ${doSales}
+                <div>${fullCost}</div>            
+            </div>
+            <div id="rank">
+                ${stars}
+            </div>
+            <div id="order">
+                <img src="images/${myCard[key].but}" alt="">
+                
+            </div>
+        </div>  
 `;
 
 
