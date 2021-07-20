@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap');
+
+        div {
+            font-family: Poppins, sans-serif;
+            font-weight: 700;
+            background-color: #272727; 
+            color: #fff;                    
+        }
+
+        h3 {    
+            font-size: 12px;            
+            margin: 0;
+            margin-top: 0px;
+            margin-right: 0px;    
+            margin-left: 0px;
+            line-height: 22px;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        button {
+            -webkit-appearance: button;
+        }
+        .sw-buy {
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 30px;
+            text-transform: uppercase;
+            padding: 7px 26px;
+            background-color: #f63440;
+            cursor: pointer;
+            padding: 5px 56px;
+            border-radius: 6px;  
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="colorsDiv" style = "width: 200px; height: 165px;padding-top: 21px;padding-bottom: 30px;padding-left: 20px;"></div>
+    
+        <!-- <button name="button" type="submit" class="flat-button sw-buy">Buy Now</button>
+    </div>  -->
+
+    <script>
+        let choiceColor = 0;
+        let colors = ['#f63440','#7cc576','#cfc300','#f8b334']; // массив цветов темы
+
+        let div = '<img src="images/wordpress-version.png" width="180" height="23" alt="">'; 
+        
+        div += `<button name="button" type="submit" class="sw-buy">Buy Now</button>`;
+        // Блок h3
+        div += `<div style = "width: 200px; height: 22px;display:block;margin-bottom: 10px"><h3>SCHEME COLOR</h3></div>`;
+
+        // Flex-container для размещения цветных блоков
+        div += `<div class="ws-colors" style = "width: 200px; height: 48px; display: flex;"</div>`; 
+
+        // программно формируем блоки цветов
+        for (i=0; i < 4; i++) {
+            div += `
+            <div id=divColor${i} onclick="setCurrent(${i})" style="background: ${colors[i]};
+             width: 30px; height: 30px; justify-content:left ;margin-right: 5px ;margin-bottom: 10px;
+              text-align: center; color:${colors[i]}; cursor: pointer">&#10004</div>`;              
+        }
+        colorsDiv.innerHTML = div;
+
+        currentDivColorElem = document.getElementById(`divColor${0}`);
+        currentDivColorElem.style.color = `white`;
+
+        function setCurrent(n) {
+
+            if (choiceColor != n) { 
+                OldDivColorElem = document.getElementById(`divColor${choiceColor}`);                
+                OldDivColorElem.style.color = colors[choiceColor];
+
+                currentDivColorElem = document.getElementById(`divColor${n}`);
+                currentDivColorElem.style.color = `white`;
+
+                buttonElem = document.getElementsByClassName(`sw-buy`)[0];
+                buttonElem.style.background = colors[n];             
+
+                choiceColor = n;
+            }         
+        }
+    </script>    
+</body>
+</html>
